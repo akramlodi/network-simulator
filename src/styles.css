@@ -1,0 +1,217 @@
+body {
+    margin: 0;
+    overflow: hidden; 
+    background-color: #000000; 
+    color: white; 
+    font-family: 'Courier New', monospace; 
+}
+
+canvas {
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+}
+
+#ui {
+    position: absolute;
+    top: 15px; 
+    width: 100%;
+    text-align: center;
+    z-index: 100; 
+    pointer-events: none; 
+}
+
+#info {
+    font-size: 14px;
+    padding: 10px 18px; 
+    background-color: rgba(25, 30, 50, 0.35); 
+    border-radius: 10px; 
+    display: inline-block;
+    text-shadow: 0 0 5px rgba(0, 128, 255, 0.8); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    transition: all 0.3s ease; 
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05); 
+}
+
+#loading {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+    transition: opacity 0.6s ease-out; 
+}
+
+#loading span {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 15px; 
+}
+
+#progress-container {
+    width: 60%;
+    max-width: 300px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden; 
+}
+
+#progress {
+    height: 100%;
+    width: 0%; 
+    background: linear-gradient(90deg, #00a2ff, #00ffea); 
+    transition: width 0.3s ease; 
+    border-radius: 3px;
+}
+
+#controls {
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 100;
+    text-align: center;
+    pointer-events: all; 
+    background-color: rgba(25, 30, 50, 0.4); 
+    padding: 15px 25px; 
+    border-radius: 12px; 
+    border: 1px solid rgba(255, 255, 255, 0.12); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+button {
+    background: rgba(0, 80, 180, 0.7); 
+    color: white;
+    border: 1px solid rgba(0, 180, 255, 0.6); 
+    border-radius: 6px;
+    padding: 8px 15px;
+    margin: 0 8px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+button:hover {
+    background: rgba(0, 110, 220, 0.9); 
+    border-color: rgba(0, 210, 255, 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 150, 255, 0.3);
+}
+
+.scenario-option {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    background: rgba(0, 60, 120, 0.6);
+    border: 1px solid rgba(0, 140, 255, 0.5);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.scenario-option:hover {
+    background: rgba(0, 90, 180, 0.8);
+    transform: translateY(-1px);
+}
+
+.scenario-option.active {
+    background: rgba(0, 120, 220, 0.9);
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+}
+
+#network-status {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: rgba(25, 30, 50, 0.4);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    font-size: 12px;
+    max-width: 250px;
+}
+
+#packet-log {
+    position: absolute;
+    bottom: 90px;
+    left: 20px;
+    background-color: rgba(25, 30, 50, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    font-size: 12px;
+    max-width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    margin-bottom: 4px;
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.log-tcp {
+    color: #66ccff;
+}
+
+.log-udp {
+    color: #ffcc66;
+}
+
+.log-http {
+    color: #66ff99;
+}
+
+.log-dns {
+    color: #ff99cc;
+}
+
+.log-error {
+    color: #ff6666;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #controls {
+        width: 90%;
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    #controls button {
+        margin: 5px 0;
+    }
+    
+    .scenario-option {
+        margin: 5px 2px;
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+    
+    #network-status {
+        top: auto;
+        bottom: 90px;
+        right: 20px;
+        font-size: 10px;
+        max-width: 120px;
+    }
+    
+    #packet-log {
+        max-width: 150px;
+        max-height: 150px;
+        font-size: 10px;
+    }
+}

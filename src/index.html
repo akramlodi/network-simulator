@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP/IP Network Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/",
+          "animejs": "https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.es.js",
+          "simplex-noise": "https://cdn.skypack.dev/simplex-noise@4.0.1"
+        }
+      }
+    </script>
+</head>
+<body>
+    <div id="loading">
+        <span>Initializing Network Simulator...</span>
+        <div id="progress-container">
+             <div id="progress"></div>
+        </div>
+    </div>
+
+    <div id="ui">
+        <div id="info">TCP/IP Network Simulator</div>
+    </div>
+
+    <div id="network-status">
+        <div>Active Nodes: <span id="active-nodes">0</span></div>
+        <div>Packets Sent: <span id="packets-sent">0</span></div>
+        <div>Bandwidth: <span id="bandwidth">0</span> kbps</div>
+        <div>Packet Loss: <span id="packet-loss">0</span>%</div>
+        <div>Current Latency: <span id="latency">0</span> ms</div>
+    </div>
+
+    <div id="packet-log"></div>
+
+    <div id="controls">
+        <button id="toggle-simulation">Pause Simulation</button>
+        <button id="add-node">Add Node</button>
+        <button id="simulate-attack">Simulate Attack</button>
+        <div style="margin-top: 10px;">
+            <div class="scenario-option active" data-scenario="normal">Normal Traffic</div>
+            <div class="scenario-option" data-scenario="highload">High Load</div>
+            <div class="scenario-option" data-scenario="failover">Failover</div>
+            <div class="scenario-option" data-scenario="p2p">P2P Network</div>
+        </div>
+    </div>
+
+    <canvas id="webglCanvas"></canvas>
+
+    <!-- Import utilities first -->
+    <script type="module" src="utils/scenarios.js"></script>
+    <script type="module" src="utils/nodes.js"></script>
+    <script type="module" src="utils/connections.js"></script>
+    <script type="module" src="utils/packets.js"></script>
+    
+    <!-- Import main simulation script -->
+    <script type="module" src="networkSimulator.js"></script>
+</body>
+</html>
